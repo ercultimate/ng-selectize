@@ -76,6 +76,11 @@ export class NgSelectizeComponent implements OnInit, OnChanges, DoCheck, Control
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
 		if (this.selectize) {
+			if (changes.hasOwnProperty('config')) {
+				this.selectize.destroy();
+				this.ngOnInit();
+				return;
+			}
 			if (changes.hasOwnProperty('placeholder') || changes.hasOwnProperty('hasOptionsPlaceholder')
 				|| changes.hasOwnProperty('noOptionsPlaceholder')) {
 				this.updatePlaceholder();
